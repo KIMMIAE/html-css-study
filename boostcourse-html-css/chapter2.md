@@ -48,8 +48,29 @@
 <s>중간선이 있는</s> vs <del>삭제된</del> 
 ```
 
-
-
-
 ### 읽어보기
 * [Inline text semantics](https://developer.mozilla.org/en-US/docs/Web/HTML/Element#inline_text_semantics)
+
+## 2.4 앵커 요소
+```html
+<a href="http://www.naver.com/">네이버</a>
+```
+* 다른 문서로 이동할 수 있는 링크를 생성한다.
+* href: 링크의 목적지가 되는 URL을 지정한다.
+* target: 링크된 리소스를 어디에 표시할지를 나타낸다.
+  * _self: 현재 화면에 표시한다는 의미로, target 속성이 선언되지 않으면 기본적으로 self와 같이 동작한다.
+  * _blank: 새로운 창에 표시한다는 의미로 외부 페이지가 나타나게끔 하는 속성이다.
+* ```<a>```를 통해 페이지 내부의 특정 요소로 초점을 이동할 수도 있는데, 이를 내부 링크라고 한다.
+* 내부 링크를 사용할 때는 href 속성값에 #을 쓰고 그 뒤에 페이지 내에서 이동하고자 하는 요소의 id 속성값을 적으면 된다
+
+```html
+<h1 id="top">앵커 요소</h1>
+(...)
+<a href="#top">위로 가기</a>
+```
+
+### 읽어보기
+* [The Anchor element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a)
+
+## 2.5 의미가 없는 컨테이너 요소
+* 
