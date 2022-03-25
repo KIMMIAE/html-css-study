@@ -194,9 +194,9 @@
 ```
 
 ### 읽어보기
-* [<ul>: The Unordered List element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul)
-* [<ol>: The Ordered List element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ol)
-* [<dl>: The Description List element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dl)
+* [```<ul>```: The Unordered List element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul)
+* [```<ol>```: The Ordered List element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ol)
+* [```<dl>```: The Description List element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dl)
 
 ## 2.7 이미지 요소
 * ```<img>```는 문서에 이미지를 삽입하는 태그로, 닫는 태그가 없는 빈 태그이다.
