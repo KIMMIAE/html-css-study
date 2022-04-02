@@ -334,3 +334,170 @@
 
 ### 읽어보기
 * [```<table>```: The Table element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table)
+
+## 2.10 폼 요소 1
+* 폼 관련 요소(FORM): 서버에 데이터를 전달하기 위한 요소들.
+ * ex) 대표적인 폼 요소 ```<input>```
+* ```<input>```은 내용이 없는 빈 요소이며 type 속성을 통해 여러 종류의 입력 양식으로 나타나게 된다.
+
+**input 요소들**
+* type="text"
+ * 주로 아이디, 이름, 주소, 전화번호 등 단순한 텍스트를 입력할 때 사용
+ * type="text"의 placeholder 속성은 사용자가 입력하기 전 미리 화면에 노출하는 값으로, 입력하는 값의 양식을 표현할 수 있다.
+```html
+<input type="text" placeholder="사용자가 입력하기 전 미리 화면에 노출하는 값">
+```
+* type="password"
+ * 암호와 같이 공개할 수 없는 내용을 입력할 때 사용
+ * 화면에는 type="text"와 같게 나타나지만 실제로 입력할 때 값을 노출하지 않는다.
+```html
+<input type="password">
+```
+* type="radio"
+ * 라디오 버튼을 만들 때 사용
+ * 라디오 버튼은 중복 선택이 불가능하며 하나의 항목만을 선택해야 한다.
+ * (fun)옛날 자동차의 라디오 버튼처럼 생겼다고 해서 라디오 버튼이라고 부른다고 함.
+ * name 속성으로 같은 성격의 라디오 버튼임을 명시해줘야 한다.
+```html
+<input type="radio" name="gender"> 남자
+<input type="radio" name="gender"> 여자
+```
+* type="checkbox"
+ * 체크박스를 만들 때 사용
+ * 체크박스는 중복 선택이 가능하다.
+```html
+<input type="checkbox" name="hobby"> 등산
+<input type="checkbox" name="hobby"> 독서
+<input type="checkbox" name="hobby"> 운동
+```
+* 라디오 버튼과 체크박스에는 checked, name 속성이 존재한다.
+  * checked 속성은 값이 별도로 존재하지 않는 boolean 속성이다.
+  * boolean 속성은 true/false 둘 중 하나의 값을 가지며 속성이 존재하면 true, 속성이 존재하지 않으면 false를 가진다.
+  * name 속성은 라디오 버튼과 체크박스를 그룹화시켜주는 속성이다.
+
+## 2.11 폼 요소 2
+**input 요소들2**
+* type="file"
+ * 파일을 서버에 올릴 때 사용
+ * 브라우저에 따라 표현되는 형태는 조금씩 다르지만, 모두 같은 역할을 함.
+```html
+<input type="file">
+```
+* type="submit|reset|image|button"
+ * submit, reset, image, button 타입은 모두 클릭 가능한 버튼을 만든다.
+  * submit : form의 값을 전송하는 버튼
+  * reset : form의 값을 초기화하는 버튼
+  * image : 이미지를 삽입할 수 있는 버튼 (submit과 동작이 동일함)
+  * button : 아무 기능이 없는 버튼
+```html
+<!-- 실제로는 없는 페이지(./test.html) 임시로 넣었기 때문에 submit 버튼 누르면 파일 찾을 수 없다는 에러 뜸 -->
+<form action="./test.html">
+  메시지: <input type="text" name="message"><br>
+  <input type="submit">
+  <!-- reset 버튼 누르면 폼 초기화 -->
+  <input type="reset">
+  <!-- 이미지 버튼은 이미지 관련 속성인 src, alt 속성이 반드시 필요하며 width/height 속성을 적용할 수도 있다. -->
+  <input type="image" src="http://placehold.it/50x50?text=click" alt="click" width="50" height="50">
+  <!-- button 타입은 개발자가 직접 커스텀해서 기능 추가해줄 때 사용 -->
+  <input type="button" value="버튼">
+</form>
+```
+
+### 읽어보기
+* [HTML elements reference: Form](https://developer.mozilla.org/en-US/docs/Web/HTML/Element#forms)
+
+## 2.12 폼 요소 3
+**select**
+* ```<select>```는 선택 목록 상자 또는 콤보박스라고도 한다.
+* 몇 개의 선택지를 리스트 형태로 노출하고 그중 하나를 선택할 수 있게 하는 태그이다.
+ * multiple 속성을 사용하면 다중 선택도 가능
+* ```<select>```내부의 ```<option>```으로 각 항목을 나타낸다
+* ```<option>```의 속성으로는 selected가 있으며 이는 선택된 항목을 의미한다.
+```html
+<select>
+  <option>서울</option>
+  <option>경기</option>
+  <option>강원</option>
+  <option>제주</option>
+</select>
+```
+
+**textarea**
+* 한 줄만을 입력할 수 있는 ```<input type="text">```와 달리 여러 줄의 텍스트를 입력할 때 사용한다.
+* ```<textarea>```에는 텍스트 상자의 크기를 조절하는 rows, cols 속성이 있다.
+ * cols : 가로 크기를 조절하는 속성(한 줄에 들어가는 글자의 수, 수치의 의미는 평균적인 글자의 너비로 정확히 글자 수를 나타내지는 않는다.)
+ * rows : 세로 크기를 조절하는 속성(화면에 보여지는 줄 수)
+```html
+<textarea rows="5" cols="30" placeholder="자기소개는 짧게 해주세요"></textarea>
+```
+
+**button**
+* 사용자가 클릭 가능한 버튼을 만들 때 사용하며 submit, reset, button 3가지의 타입이 있다.
+* 각 버튼은 이전에 배웠던 input 타입의 submit, reset, button과 모두 같은 기능을 가진 버튼이다.
+* 다만, 빈 태그가 아니며 내용을 안에 직접 넣을 수 있으므로 좀 더 자유로운 스타일 표현이 가능하다.
+```html
+<button type="submit|reset|button">
+  <img src="./test_icon.png" alt="자유로운 스타일 표현 가능">
+  빈 태그가 아니라 내용을 안에 직접 넣을 수 있다
+</button>
+```
+
+## 2.13 폼 요소 4
+**label**
+* <label>은 form 요소의 이름과 form 요소를 명시적으로 연결시켜주기 위해 사용한다
+* 모든 form 요소에 사용할 수 있다.
+* form 요소의 id 속성값과 <label>의 for 속성값을 같게 적어주어야 한다.
+* <label>을 사용하면 이를 클릭했을 경우 해당 form 요소를 클릭한 것처럼 동작한다.
+* 스크린 리더기를 통해 듣게 되면 해당 form 요소에 접근 시 <label>을 함께 읽어주게 된다.
+* <label>은 사용성, 접근성적인 측면으로 중요한 역할을 하므로 반드시 써주는 것이 좋다.(필수적)
+```html
+<label for="name">이름</label>: <input type="text" id="name"><br>
+<label for="nickname">닉네임</label>: <input type="text" id="nickname"><br>
+<label for="address">주소</label>: <input type="text" id="address"><br>
+```
+
+**fieldset, legend**
+* ```<fieldset>```, ```<legend>```는 form 요소를 구조화 하기 위해 필요한 태그이다
+* ```<fieldset>``` : 여러 개의 폼 요소를 그룹화하여 구조적으로 만들기 위해 사용
+* ```<legend>``` : 폼 요소의 제목으로 ```<fieldset>``` 내부에 작성
+* ```<fieldset>```은 보통 form의 성격에 따라 구분합니다.
+* ```<legend>```는 ```<fieldset>```의 자식으로 반드시 최상단에 위치해야 합니다.
+
+```html
+<fieldset>
+  <legend>필수 정보</legend>
+  <label for="name">아이디</label>: <input type="text" id="id"><br>
+  <label for="userpwd">비밀번호</label>: <input type="password" id="userpwd"><br>
+</fieldset>
+<fieldset>
+  <legend>부가 정보</legend>
+  <label for="nickname">닉네임</label>: <input type="text" id="nickname"><br>
+  <label for="address">주소</label>: <input type="text" id="address"><br>
+</fieldset>
+```
+
+**form**
+* ```<form>```은 form 요소들을 감싸는 태그로 데이터를 묶어서 실제 서버로 전송해주는 역할을 하는 태그이다.
+* 만약 ```<fieldset>```으로 구조화되어있다면 ```<fieldset>```도 함께 감싸는 역할을 한다.
+```html
+<form action="" method="">
+  <fieldset>
+    <legend>필수 정보</legend>
+    <label for="name">아이디</label>: <input type="text" id="id"><br>
+    <label for="userpwd">비밀번호</label>: <input type="password" id="userpwd"><br>
+  </fieldset>
+  <fieldset>
+    <legend>부가 정보</legend>
+    <label for="nickname">닉네임</label>: <input type="text" id="nickname"><br>
+    <label for="address">주소</label>: <input type="text" id="address"><br>
+  </fieldset>
+</form>
+```
+* ```<form>```에는 대표적인 2가지 속성이 있다.
+* action: 데이터를 처리하기 위한 서버의 주소
+* method: 데이터를 전송하는 방식을 지정
+ * method 속성값에는 get/post 2가지 방식이 존재한다.
+ * get 방식은 데이터가 전송될 때 주소창에 파라미터 형태로 붙어 데이터가 노출된다.
+  * 민감한 정보를 다룰 때는 쓰면 안 된다.
+ * 반면, post 방식은 데이터가 전송될 때 데이터가 노출되지 않는다.
+  * 민감한 정보를 다룰 때는 post 방식을 사용해야 함
