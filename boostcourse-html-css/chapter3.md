@@ -80,7 +80,7 @@ object[usemap], select, textarea, video[controls]
 
 ## 3.3 HTML5 시멘틱 요소
 
-**HTML5에서 새로 생긴 Sematic 요소들**
+**HTML5에서 새로 생긴 Semantic 요소들**
 * ```<article>```: 문서, 페이지, 애플리케이션, 또는 사이트 안에서 완전히 독립적으로 구성할 수 있는 요소를 정의할 때 사용
  * ex.게시판과 블로그 글, 매거진이나 뉴스 기사 등
 * ```<aside>```: 문서의 주요 내용과 간접적으로만 연관된 부분 정의할 때 사용
