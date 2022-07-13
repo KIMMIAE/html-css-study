@@ -266,3 +266,200 @@ p[class^="color"] { font-style: italic; } /* 1, 3번째 요소 */
 p[class$="color"] { font-style: italic; } /* 2번째 요소 */
 p[class*="color"] { font-style: italic; } /* 1, 2, 3번째 요소 */
 ```
+
+## 4.6 문서 구조 관련 선택자
+**문서 구조의 이해**
+```html
+<html>
+<body>
+    <div>
+        <h1><span>HTML</span>: Hyper Text Markup Language</h1>
+    </div>
+    <p>HTML과 CSS와 JAVASCRIPT를 이용해서 멋진 웹 사이트를 제작할 수 있습니다.</p>
+</body>
+</html>
+```
+* 부모와 자식
+  * 부모 요소는 그 요소를 포함하는 가장 가까운 상위 요소로, 그 요소의 부모 요소는 단 하나뿐이다
+  * 자식 요소는 부모 요소와 반대라고 생각하면 되며 자식 요소는 여러 개일 수도 있다
+  * ```<body>```의 부모 요소: ```<html>``` ↔ ```<html>```의 자식 요소: ```<body>```
+  * ```<div>```의 부모 요소: ```<body>``` ↔ ```<body>```의 자식 요소: ```<div>```, ```<p>```
+  * ```<h1>```의 부모 요소: ```<div>``` ↔ ```<div>```의 자식 요소: ```<h1>```
+  * ```<span>```의 부모 요소: ```<h1>``` ↔ ```<h1>```의 자식 요소: ```<span>``` 
+  * ```<p>```의 부모 요소: ```<body>``` ↔ ```<body>```의 자식 요소: ```<div>```, ```<p>```
+* 조상과 자손
+  * 조상과 자손의 관계는 부모와 자식의 관계와 비슷하다.
+  * 정확히 얘기하면 부모와 자식의 관계를 포함한 확장된 관계라고 생각하면 됨
+  * 조상 요소는 그 요소를 포함하는 모든 요소로, 부모 요소를 포함하여 여러 개일 수도 있다.
+  * 자손 요소는 그 반대로, 그 요소가 포함하고 있는 모든 요소가 자손 요소이다.
+  * ```<body>```의 조상 요소: ```<html>``` ↔ ```<html>```의 자손 요소: ```<body>```, ```<div>```, ```<h1>```, ```<span>```, ```<p>```
+  * ```<div>```의 조상 요소: ```<html>```, ```<body>``` ↔ ```<body>```의 자손 요소: ```<div>```, ```<h1>```, ```<span>```, ```<p>```
+  * ```<h1>```의 조상 요소: ```<html>```, ```<body>```, ```<div>``` ↔ ```<div>```의 자손 요소: ```<h1>```, ```<span>```
+  * ```<span>```의 조상 요소: ```<html>```, ```<body>```, ```<div>```, ```<h1>``` ↔ ```<h1>```의 자손 요소: ```<span>```
+  * ```<p>```의 조상 요소: ```<html>```, ```<body>``` ↔ ```<body>```의 자손 요소: ```<div>```, ```<h1>```, ```<span>```, ```<p>```
+  * 보통 문서의 요소들은 모두 이처럼 어느 요소의 자식(자손) 요소이자 부모(조상) 요소가 되는 경우가 많다.
+* 형제
+  * 같은 부모를 가지고 있는 요소들은 서로 형제 관계에 있다.
+  * 위 코드에서는 ```<div>```, ```<p>```가 형제 요소이다.
+  * 형제 관계 중에는 인접한 관계도 있다.
+  * 형제 관계에 있는 요소 중 바로 뒤에 이어 나오는 요소를 인접해 있다고 한다.
+  * 여기서 ```<p>```가 ```<div>```에 인접한 형제 요소가 된다.
+* 문서의 구조는 흔히 가계도나 조직도의 관계와 비슷하다고 생각하면 이해하기가 쉽다.
+
+**문서 구조 관련 선택자**
+
+* 자손 선택자
+  * 자손 선택자는 선택자 사이에 아무 기호없이 그냥 공백으로 구분함
+  * 이 선택자는 ```<div>```의 자손 요소인 ```<span>```를 선택하는 선택자이다.
+```css
+div span { color: red; }
+```
+* 자식 선택자
+  * 자식 선택자는 선택자 사이에 닫는 꺽쇠 기호(>)를 넣는다.
+  * 꺽쇠 기호와 선택자 기호 사이에는 공백은 있거나 없어도 상관이 없다.
+  * 이 선택자는 ```<div>```의 자식 요소인 ```<h1>```를 선택하는 선택자이다.
+```css
+div > h1 { color: yellow; }
+```
+* 인접 형제 선택자
+  * 인접 형제 선택자는 선택자 사이에 + 기호를 넣는다.
+  * 자식 선택자와 마찬가지로 공백은 있거나 없어도 상관이 없다.
+  * 인접 형제 선택자는 형제 관계이면서 바로 뒤에 인접해 있는 요소를 선택하는 선택자이다.
+```css
+div + p { color: blue; }
+```
+* 아래 코드처럼 문서 구조 관련 선택자는 더 복잡하게 사용할 수 있다.
+* 유의할 점은 요소들이 많이 나열되어 있더라도 제일 우측에 있는 요소가 실제 선택되는 요소라는 것이다. 
+```css
+/* body 요소의 자식인 div 요소의 자손인 table 요소 바로 뒤에 인접한 ul 요소 선택! */
+
+body > div table + ul { ... }
+```
+
+## 4.8 가상 선택자 1
+**가상 클래스(pseudo class)**
+* 가상 클래스는 미리 정의해놓은 상황에 적용되도록 약속된 보이지 않는 클래스이다.
+* 우리가 직접 요소에 클래스를 선언하는 것은 아니고, 약속된 상황이 되면 브라우저 스스로 클래스를 적용해준다.
+  * ex. ```<p>```에 마우스 커서를 올렸을 때만 특정 스타일을 주고 싶은 경우 가상 클래스가 없다면
+  * 임의의 클래스 선택자를 선언하여 특정 스타일 규칙을 만든다. > p 요소에 커서가 올라가면 p 요소에 클래스를 집어넣는다. > p 요소에서 커서가 빠지면 p 요소에 클래스를 삭제한다. 
+* 예시에서 2, 3번은 동적으로 변화되어야 하는데, HTML과 CSS는 정적인 언어이기 때문에 처리할 수 없다.
+* 어쩔 수 없이 다른 언어를 사용해야 하는데, 이는 개발 비용이 들어간다.
+* 그래서 CSS에서는 흔하게 사용되는 여러 패턴에 대해서 미리 정의해놓고, 가상 클래스로 제어할 수 있게 했다.
+```css
+:pseudo-class {
+    property: value;
+}
+```
+* 위처럼 가상 클래스는 :(콜론) 기호를 써서 나타낸다.
+* 가상 클래스를 이용하면 아래의 경우에도 CSS만으로 처리가 가능하므로 훨씬 효율적이다.
+  * ":hover 가상 클래스 선택자를 이용해서 스타일 규칙을 만든다. (hover는 마우스 커서가 올라갔을 때 적용이 되도록 정의되어 있다.)"
+
+**문서 구조와 관련된 가상 클래스**
+* 문서 구조와 관련된 가상 클래스는 first-child와 last-child 가상 클래스 선택자이다.
+* :first-child : 첫 번째 자식 요소 선택
+* :last-child : 마지막 자식 요소 선택
+```html
+<ul>
+    <li>HTML</li>
+    <li>CSS</li>
+    <li>JS</li>
+</ul>
+```
+```css
+li:first-child { color: red; }
+li:last-child { color: blue; }
+```
+* 첫 번째 ```<li>```와 마지막 ```<li>```에 가상 클래스가 적용된다.
+* 실제 ```<li>```에는 class 속성이 없지만 내부적으로 가상 클래스가 적용되어 마치 아래의 코드와 같이 동작하게 된다.
+```html
+<ul>
+    <li class="first-child">HTML</li>
+    <li>CSS</li>
+    <li class="last-child">JS</li>
+</ul>
+```
+**앵커 요소와 관련된 가상 클래스**
+* 앵커 요소와 관련된 가상 클래스로는 :link와 :visited가 있다.
+* :link : 하이퍼 링크이면서 아직 방문하지 않은 앵커
+* :visited : 이미 방문한 하이퍼링크를 의미
+* 하이퍼 링크는 앵커 요소에 href 속성이 있는 것을 의미.
+```css
+a:link { color: blue; }
+a:visited { color: gray; }
+```
+
+**사용자 동작과 관련된 가상 클래스**
+* 이 클래스들도 ```<a>```에 주로 많이 쓰인다.
+* ```<a>```에만 쓸 수 있는 것은 아니며, 이 조건에 맞는 상황이 되는 요소들은 다 사용이 가능하다.
+* :focus: 현재 입력 초점을 가진 요소에 적용
+* :hover: 마우스 포인터가 있는 요소에 적용
+* :active: 사용자 입력으로 활성화된 요소에 적용
+```css
+a:focus { background-color: yellow; }
+a:hover { font-weight: bold; }
+a:active { color: red; }
+```
+* :focus는 현재 입력 초점을 가진 요소에 적용된다.
+* focus(초점)는 지금 현재 선택을 받는 것을 의미한다.
+* 예를 들면, 입력 폼 요소에 텍스트를 입력하려고 마우스 클릭해서 커서를 입력 폼 위에 올려놓으면 그때 입력 폼 요소가 초점을 받는 상태이다.
+* 또 키보드의 탭 키를 이용해서 요소를 탐색하다 보면 링크나 버튼에 점선 테두리가 이동하는 것을 볼 수 있는데, 점선 테두리가 위치하는 것도 초점을 받은 상태이다.
+* :hover는 마우스 커서가 있는 요소에 적용된다. (마우스를 올렸을 때를 의미.)
+* :active는 사용자 입력으로 활성화된 요소를 의미하는데, ```<a>```를 클릭할 때 또는 ```<button>```를 눌렀을 때처럼 순간적으로 활성화된다.
+### 읽어보기
+* [Pseudo classes](https://developer.mozilla.org/ko/docs/Web/CSS/Pseudo-classes)
+
+## 4.8 가상 선택자 2
+**가상 요소(pseudo element)**
+* 가상 요소는 HTML 코드에 존재하지 않는 구조 요소에 스타일을 부여할 수가 있다.
+* 가상 요소도 가상 클래스처럼 문서 내에 보이지 않지만, 미리 정의한 위치에 삽입되도록 약속이 되어있다.
+* 선언 방법은 가상 클래스와 같게 콜론을 사용하며, CSS3부터는 가상 클래스와 가상 요소를 구분하기 위해 가상 요소에는 ::(더블 콜론) 기호를 사용하기로 했다.
+* 하지만 하위 브라우저에서 :: 문법을 지원하지 않는 문제가 있으므로 상황에 따라 : 기호를 사용해야 한다.
+```css
+::pseudo-element {
+    property: value;
+}
+```
+* :before : 가장 앞에 요소를 삽입
+* :after : 가장 뒤에 요소를 삽입
+* :first-line : 요소의 첫 번째 줄에 있는 텍스트
+* :first-letter : 블록 레벨 요소의 첫 번째 문자
+```html
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+```
+```css
+p::before { content: "###" }
+p::after { content: "!!!" }
+p::first-line { ... }
+p::first-letter { ... }
+```
+* before와 after 가상 요소는 애초에 내용이 없는 상태로 생성되기 때문에 내용을 넣기 위해 content 속성을 이용해야한다.
+```html
+<!-- 실제 HTML 코드에는 나타나지 않지만, before와 after가 어떻게 동작하는지 이해를 돕기 위해 코드를 아래와 같이 변경 -->
+<p>
+    <before>###</before>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    <after>!!!</after>
+</p>
+<!-- 눈에 보이지 않지만, 내부에서 이처럼 요소가 생성된다.-->
+<!-- first-line과 first-letter도 마찬가지로 아래 코드와 같은 것으로 생각하면 됨 -->
+<p>
+    <first-letter>L</first-letter>orem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+</p>
+<p>
+    <!-- 모니터 가로 해상도에 따라 요소가 포함하는 내용이 변동된다. -->
+    <first-line>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiu ..(..어딘가쯤..) </first-line>... unt ut labore et dolore magna aliqua.
+</p>
+```
+
+
+### 읽어보기
+* [Pseudo elements](https://developer.mozilla.org/ko/docs/Web/CSS/Pseudo-elements)
+* [반드시 기억해야 하는 CSS 선택자 30개](https://code.tutsplus.com/ko/tutorials/the-30-css-selectors-you-must-memorize--net-16048)
+
+## 4.9 구체성
+
+## 4.10 상속
+
+## 4.11 캐스케이딩
+
+## 4.12 선택자 정리
