@@ -114,8 +114,116 @@ body{color: rgba(0,0,0,1)} /* (red, green, blue, alpha / 0~255, 0 or 1) */
 
 
 ## 5.4 속성-background
+**background 관련 속성**
+```css
+/* 속성 */
+background-color: green;
+background-image: url("img_tree.gif");
+background-repeat: no-repeat;
+background-position: top center;
+background-attachment: scroll;
 
+/* 축약형 */
+background: green url("img_tree.gif") no-repeat fixed center;
+```
+* background-color
+ * 기본 값 : transparent
+ * 배경의 색상을 지정하는 속성이다.
+ * 앞선 색상 강의에서 배운 색상 값 적용 방식과 같다.
+* background-image
+ * 기본 값 :  none
+ * 배경으로 사용할 이미지의 경로를 지정하는 속성이다.
+ * url의 경로는 절대 경로, 상대 경로 모두 사용 가능하다.
+ * 만약 background-color에 색상이 적용된 상태에서 background-image로 사용된 이미지에 투명한 부분이 있다면, 그 부분에 background-color 색상이 노출된다.
+* background- repeat
+ * 기본 값 : repeat
+ * 이미지의 반복 여부와 방향을 지정하는 속성이다.
+ * 기본값이 repeat이기 때문에 따로 설정하지 않으면 x, y축으로 반복되어서 표시된다.
+ * background-repeat의 값으로 사용할 수 있는 것들은 다음과 같다.
+ * 속성 값
+  * repeat: x, y축 으로 모두 반복한다.
+  * repeat-x: x 축 방향으로만 반복한다.
+  * repeat-y: y 축 방향으로만 반복한다.
+  * no-repeat: 이미지를 반복하지 않는다.
+* background-position
+ * 기본 값 : 0%  0% 요소에서 배경 이미지의 위치를 지정하는 속성이다.
+ * x축, y축으로부터의 위치를 지정할 수 있으며, 값의 선언 순서는 x축, y축으로부터의 간격이다.
+ * 만일 한쪽만 지정된다면 나머지는 중앙 값(center)으로 적용된다.
+ * 속성 값
+  * %: 기준으로부터 % 만큼 떨어진 지점과 이미지의 % 지점이 일치하는 곳에 위치시킨다.
+  * px: 기준으로부터 px 만큼 떨어진 지점과 이미지의 (0,0) 지점이 일치하는 곳에 위치시킨다.
+  * 키워드: top, left, right, bottom, center 키워드를 사용할 수 있다. 키워드는 선언 순서와 관계없이 top, bottom은 y축 기준으로 하며 left, right는 x축을 기준으로 한다.
+* background-attachment
+ * 기본 값 : scroll 화면 스크롤에 따른 배경 이미지의 움직임 여부를 지정하는 속성이다.
+ * 속성 값
+  * scroll: 배경 이미지는 요소 자체를 기준으로 고정되어 있으며 내용과 함께 스크롤 되지 않는다.
+  * local: 배경 이미지는 요소의 내용을 기준으로 고정되어 있으며 내용과 함께 스크롤 된다.
+  * fixed: 배경 이미지는 뷰포트를 기준으로 고정되어 있으며 스크롤에 영향을 받지 않는다.
+   * 뷰포트 : 사용자가 시각적으로 볼 수 있는 웹페이지 영역을 의미한다. 컴퓨터나 휴대폰과 같은 장치에 Display 요소가 표현되는 영역을 말한다.
+```html
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>background</title>
+  <style>
+    div {
+      height: 500px;
+      background-color: yellow;
+      background-image: url(https://www.w3schools.com/CSSref/img_tree.gif);
+      background-repeat: no-repeat;
+      background-position: center top;
+      /* 축약형 */
+      background: yellow url(https://www.w3schools.com/CSSref/img_tree.gif) no-repeat center top;
+    }
+  </style>
+</head>
+<body>
+    <div> css background 속성 실습 </div>
+</body>
+</html>
+```
+* background-size, background-origin, background-clip, background-blend-mode 등 다른 다양한 속성들도 확인해보자!
+
+### 읽어보기
+* [CSS Backgrounds](https://www.w3schools.com/css/css_background.asp)
 ## 5.5 속성-boxmodel
+* 문서를 배치할 때 브라우저의 렌더링 엔진은 표준 CSS 기본 박스 모델에 따라 각 요소를 사각형 상자로 나타낸다. 
+* CSS를 이용해 이 상자의 크기, 위치 및 속성(색상, 배경, 테두리 크기 등)을 변경할 수 있다.
+
+**boxmodel 구성**
+![boxmodel](./images/boxmodel.png)
+* Content 영역
+ * 요소의 실제 내용을 포함하는 영역이다. 따라서 크기는 내용의 너비 및 높이를 나타낸다.
+* Border 영역
+ * content 영역을 감싸는 테두리 선을 border라고 한다.
+* Padding 영역
+ * content 영역과 테두리 사이의 여백을 padding이라고 한다.
+ * content 영역이 배경, 색 또는 이미지가 있을 때 패딩 영역까지 영향을 미친다.
+ * 이에 따라 padding을 content의 연장으로 볼 수도 있다.
+* Margin 영역
+ * border 바깥쪽의 영역을 margin이라고 한다.
+ * border 영역을 다른 요소와 구별하기 위해 쓰이는 빈 영역이다.
+ * 즉, 주변 요소와의 여백(간격)을 margin을 이용해 지정할 수 있다.
+```html
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>box model</title>
+  <style>
+    div {
+      margin: 50px;
+      padding: 50px;
+      border: 10px solid #000;
+    }
+  </style>
+</head>
+<body>
+  <div> 박스 모델에 대하여 알아봅시다 </div>	
+</body>
+</html>
+```
 
 ## 5.6 속성-border
 
