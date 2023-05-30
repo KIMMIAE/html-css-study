@@ -192,8 +192,9 @@ background: green url("img_tree.gif") no-repeat fixed center;
 * 문서를 배치할 때 브라우저의 렌더링 엔진은 표준 CSS 기본 박스 모델에 따라 각 요소를 사각형 상자로 나타낸다. 
 * CSS를 이용해 이 상자의 크기, 위치 및 속성(색상, 배경, 테두리 크기 등)을 변경할 수 있다.
 
-**boxmodel 구성**
 ![boxmodel](./images/boxmodel.png)
+
+**boxmodel 구성**
 * Content 영역
  * 요소의 실제 내용을 포함하는 영역이다. 따라서 크기는 내용의 너비 및 높이를 나타낸다.
 * Border 영역
